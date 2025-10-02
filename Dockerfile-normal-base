@@ -1,0 +1,20 @@
+FROM alpine:3 AS base
+
+RUN delgroup ping 2>/dev/null || true && \
+    delgroup dialout 2>/dev/null || true && \
+    delgroup tape 2>/dev/null || true && \
+    delgroup video 2>/dev/null || true && \
+    apk del iputils 2>/dev/null || true
+
+RUN apk upgrade && apk --no-cache add \
+    ca-certificates \
+    tzdata \
+    curl \
+    shadow \
+    su-exec
+
+RUN printf "root:x:0:root\nnogroup:x:65533:\nnobody:x:65534:\n" > /etc/group && \
+    printf "root:x:0:0:root:/root:/bin/sh\nnobody:x:65534:65534:nobody:/:/sbin/nologin\n" > /etc/passwd
+
+LABEL org.opencontainers.image.title="OFKM Base"
+LABEL org.opencontainers.image.description="Minimal Alpine base for OFKM Projects"
