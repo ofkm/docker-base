@@ -17,6 +17,7 @@ RUN delgroup ping 2>/dev/null || true && \
 LABEL org.opencontainers.image.title="OFKM Base" \
       org.opencontainers.image.description="Minimal Alpine base for OFKM Projects" \
       org.opencontainers.image.version="1.0.0" \
-      org.opencontainers.image.authors="Kyle Mendell <ksm@ofkm.us>"
+      org.opencontainers.image.authors="Kyle Mendell <ksm@ofkm.us>" \
+      org.opencontainers.image.source="https://github.com/ofkm/docker-base"
 
 CMD ["/bin/sh"]
