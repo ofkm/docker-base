@@ -1,22 +1,82 @@
 FROM alpine:3
 
-RUN delgroup ping 2>/dev/null || true && \
+RUN \
+    delgroup ping 2>/dev/null || true && \
     delgroup dialout 2>/dev/null || true && \
     delgroup tape 2>/dev/null || true && \
     delgroup video 2>/dev/null || true && \
-    apk del iputils 2>/dev/null || true && \
-    apk upgrade --no-cache && apk --no-cache add \
-        ca-certificates \
-        tzdata \
-        curl \
-        su-exec && \
+    delgroup audio 2>/dev/null || true && \
+    delgroup cdrom 2>/dev/null || true && \
+    delgroup floppy 2>/dev/null || true && \
+    delgroup input 2>/dev/null || true && \
+    delgroup netdev 2>/dev/null || true && \
+    delgroup games 2>/dev/null || true && \
+    delgroup users 2>/dev/null || true && \
+    delgroup disk 2>/dev/null || true && \
+    delgroup lp 2>/dev/null || true && \
+    delgroup kmem 2>/dev/null || true && \
+    delgroup tty 2>/dev/null || true && \
+    delgroup utmp 2>/dev/null || true && \
+    delgroup mem 2>/dev/null || true && \
+    delgroup www-data 2>/dev/null || true && \
+    delgroup sshd 2>/dev/null || true && \
+    delgroup shadow 2>/dev/null || true && \
+    delgroup cdrw 2>/dev/null || true && \
+    delgroup usb 2>/dev/null || true && \
+    delgroup mail 2>/dev/null || true && \
+    delgroup messagebus 2>/dev/null || true && \
+    delgroup systemd-journal 2>/dev/null || true && \
+    delgroup systemd-network 2>/dev/null || true && \
+    delgroup polkitd 2>/dev/null || true && \
+    \
+    deluser sync 2>/dev/null || true && \
+    deluser shutdown 2>/dev/null || true && \
+    deluser halt 2>/dev/null || true && \
+    deluser operator 2>/dev/null || true && \
+    deluser games 2>/dev/null || true && \
+    deluser ftp 2>/dev/null || true && \
+    deluser mail 2>/dev/null || true && \
+    deluser news 2>/dev/null || true && \
+    deluser uucp 2>/dev/null || true && \
+    deluser proxy 2>/dev/null || true && \
+    deluser www-data 2>/dev/null || true && \
+    deluser backup 2>/dev/null || true && \
+    deluser list 2>/dev/null || true && \
+    deluser irc 2>/dev/null || true && \
+    deluser gnats 2>/dev/null || true && \
+    deluser messagebus 2>/dev/null || true && \
+    deluser sshd 2>/dev/null || true && \
+    deluser xfs 2>/dev/null || true && \
+    deluser squid 2>/dev/null || true && \
+    deluser postfix 2>/dev/null || true && \
+    deluser daemon 2>/dev/null || true && \
+    deluser bin 2>/dev/null || true && \
+    deluser adm 2>/dev/null || true && \
+    deluser lp 2>/dev/null || true && \
+    \
     printf "root:x:0:root\nnogroup:x:65533:\nnobody:x:65534:\n" > /etc/group && \
     printf "root:x:0:0:root:/root:/bin/sh\nnobody:x:65534:65534:nobody:/:/sbin/nologin\n" > /etc/passwd && \
-    rm -rf /var/cache/apk/* /tmp/*
+    \
+    rm -rf \
+        /var/cache/apk/* \
+        /tmp/* \
+        /root/.cache \
+        /usr/share/man \
+        /usr/share/doc \
+        /usr/share/info \
+        /usr/share/misc \
+        /usr/share/terminfo \
+        /usr/share/vi \
+        /var/log/* \
+        /var/tmp/* \
+        /etc/crontabs/* \
+        /etc/periodic/* \
+        /etc/network/if-* \
+        /etc/apk/cache
 
 LABEL org.opencontainers.image.title="OFKM Base" \
       org.opencontainers.image.description="Minimal Alpine base for OFKM Projects" \
-      org.opencontainers.image.version="1.0.0" \
+      org.opencontainers.image.version="1.0.1" \
       org.opencontainers.image.authors="Kyle Mendell <ksm@ofkm.us>" \
       org.opencontainers.image.source="https://github.com/ofkm/docker-base"
 
